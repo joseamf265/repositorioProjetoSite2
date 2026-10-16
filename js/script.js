@@ -69,7 +69,7 @@ document.addEventListener
                 startSlide();
             });
         });
-    });//fechamento de evento carregar pagina
+
         startSlide();
 
         const contatoForm = document.getElementById("contatoForm");
@@ -82,8 +82,46 @@ document.addEventListener
             let isValid = true
             if(name.value.trim().length < 3 ){
                 showErro(name, "O nome deve ter no minimo três caracteres");
+                isValid = false;
+            }
+            //verificar se campo e-mail é valido
+            if(isEmailValid(email.value.trim())){
+                showErro(email,"Insira um e-mail válido");
+                isValid = false;
+            }
+            //validação do campo mensagem (minimo 10 caracteres)
+            if(mensagem.value.trim().length < 10 ){
+                showErro(mensagem, "O nome deve ter no minimo 10 caracteres");
+                isValid = false;
+            }
+            //verificar se campo e-mail é valido
+            if(isEmailValid(mensagem.value.trim())){
+                showErro(mensagem,"o campo deve estar certo");
+                isValid = false;
+                       
+            }
+            
+            if(isValid){
+                claearError();
+                alert("Mensagem enviado com sucesso");
+                contatoForm,reset();
             }
         });
+        function isEmailValid (email)
+        {
+            const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*$/
+            return emailRegex.text(email);
+        }
 
+        function showErro(inputElement, mensagem)
+        {
+            const formgroup = inputElement.parentElement;
+            clearFieldError(inputElement);
+            const erroMensagem = document.createElement("small");
+            erroMensagem.className = "errpr-text";
+            erroMensagem.innerText = mensagem;
+            formgroup.appendChild(erroMensagem);
+        }
+    });//fechamento de evento carregar pagina
 
    
