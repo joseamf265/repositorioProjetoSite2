@@ -59,4 +59,31 @@ document.addEventListener
             stopSlide();
             startSlide();
         });
-});//fechamento de evento carregar pagina
+
+
+        dot.forEach((dot)  =>{
+             dot.addEventListener("click", (e) =>{
+                const index = parseInt(e.target.getAttribute("data-index"));
+                showSlide(index);
+                stopSlide();
+                startSlide();
+            });
+        });
+    });//fechamento de evento carregar pagina
+        startSlide();
+
+        const contatoForm = document.getElementById("contatoForm");
+        const name = document.getElementById("name");
+        const email = document.getElementById("email");
+        const mensagem = document.getElementById("mensagem");
+        
+        contatoForm.addEventListener("submit",(event) =>{
+            event.preventDefault();
+            let isValid = true
+            if(name.value.trim().length < 3 ){
+                showErro(name, "O nome deve ter no minimo três caracteres");
+            }
+        });
+
+
+   
